@@ -1,0 +1,90 @@
+<div class="encloser">
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <div class="header-container">
+          <header class="pull-left">
+            <h1><span class="fa fa-flag"></span><strong>NAZO</strong></h1>
+          </header>
+          <div class="pull-right score-container" ng-class="{'score' : scoreUpdate}">
+            <strong>{{currentScore}}</strong>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body game-container">
+        <div ng-show="victory" ng-animate="show" class="overlay">
+          <article>
+             <span class="fa fa-trophy"></span>
+            <header>
+              <h2 class="end-stmt"><strong>You won!</strong></h2>
+            </header>
+            <div class="buttons continue-buttons">
+              <ul class="nav btns">
+                <li>
+                  <a ng-click="nextLevel()"><strong>Next Level</strong></a>
+                </li><li>
+                  <a ng-click="quit()"><strong>Quit</strong></a>
+                </li>
+              </ul>
+            </div>
+          </article>
+        </div>
+        <div ng-show="over" ng-animate="show" class="overlay">
+          <article>
+             <span class="fa fa-frown-o"></span>
+            <header>
+              <h2 class="end-stmt"><strong>You lost!</strong></h2>
+            </header>
+            <div class="buttons continue-buttons">
+              <ul class="nav btns">
+                <li>
+                  <a ng-click="retry()"><strong>Retry</strong></a>
+                </li><li>
+                  <a ng-click='quit()'><strong>Quit</strong></a>
+                </li>
+              </ul>
+            </div>
+          </article>
+        </div>
+        <div class="time-container">
+          <timer countdown="countdownValue" interval="1000">
+            <div class="bar">
+              <span style="width: {{(countdown/60)*100}}%"></span>
+            </div>
+          </timer>
+        </div>
+        <div class="grid">
+          <div class="grid-row" ng-repeat="row in grid.rows">
+            <div class="grid-cell" ng-repeat="block in row.spots">
+              <div ng-class="{
+              'clickable' : !block.empty && !block.selected,
+              'selected' : block.selected,
+              'follow' : block.follow,
+              'hint' : block.hint
+              }" ng-click="handleClick()" class="block">
+                <span class="fa {{block.content}}"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="buttons game-buttons">
+          <ul class="nav btns">
+            <li>
+              <button class="btn btn-block" ng-click="addTime()" ng-disabled="addTimeCount === 0">
+                <strong>Time</strong><span class="sub" ng-hide="addTimeCount === 0">x {{addTimeCount}}</span>
+              </button>
+            </li><li>
+              <button class="btn btn-block" ng-click="hint()" ng-disabled="hintCount === 0">
+                <strong>Hint</strong><span class="sub" ng-hide="hintCount === 0">x {{hintCount}}</span>
+              </button>
+            </li><li>
+              <button class="btn btn-block" ng-click="quit()">
+                <strong>Quit</strong>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
