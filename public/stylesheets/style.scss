@@ -187,7 +187,11 @@ button {
 
 .game-container {
   position: relative;
-  height: 700px;
+  height: 740px;
+}
+
+.intro {
+  height: 630px;
 }
 
 .bar {
@@ -432,6 +436,24 @@ button {
   &:hover{
     background: $body-bg;
     color: white;
+  }
+}
+
+.linkback {
+  text-align: center;
+  margin-top: 28px;
+  > b {
+    padding: 15px;
+      > a {
+        text-transform: lowercase;
+        color: $body-bg;
+        text-decoration: none;
+
+        &:hover {
+          color: darken($body-bg, 20%);
+          border-bottom: 3px solid darken($body-bg, 20%)
+        }
+      }
   }
 }
 
